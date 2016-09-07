@@ -30,9 +30,18 @@ Some useful tips to help you get started:
 
 Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
+## Initial modifications
+
+* CSS was moved onto index.html.
+* JS was moved to address render blocking message.
+* Google font issue was addressed by WebFontConfig recode.
+* Images run through image-optim.
+* Pizzeria image replaced with optimized image suggested by Google.
+index.html scores after modifications are 96 Mobile, 97 Desktop. 
+
 ####Part 2: Optimize Frames per Second in pizza.html
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js.
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
