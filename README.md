@@ -37,7 +37,7 @@ Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 * Google font issue was addressed by WebFontConfig recode.
 * Images run through image-optim.
 * Pizzeria image replaced with optimized image suggested by Google.
-index.html scores after modifications are 96 Mobile, 97 Desktop. 
+index.html scores after modifications are 96 Mobile, 97 Desktop.
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
@@ -62,3 +62,20 @@ The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstra
 
 * <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
 * <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+
+## Part 2 Initial modifications to main.js
+
+* Use strict added.
+* getElementsByClassName replaced queryselector inside updatePosition function per suggestion in project webcast.
+*  Lower var i from to 200 per suggestion in project webcast.
+* changePizzaSizes rework to per BRO course example.
+* Update Position function recode to avoid render blocking error msg in Dev tools.
+* Additional getElements replacements per suggestion of mentor.
+
+
+# Initial modifications to style.css
+* Add Transform: translateZ(0) for smoother transitions between property value per suggestion in project webcast.
+* Add webkit, moz.
+* Run through autoprefixer per suggestion of mentor.
+
+
