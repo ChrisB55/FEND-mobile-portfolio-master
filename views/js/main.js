@@ -1,16 +1,13 @@
 'use strict';
 /*
-Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
-jank-free at 60 frames per second.
-There are two major issues in this code that lead to sub-60fps performance. Can
-you spot and fix both?
-Built into the code, you'll find a few instances of the User Timing API
-(window.performance), which will be console.log()ing frame rate data into the
-browser console. To learn more about User Timing API, check out:
-http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
-Creator:
-Cameron Pittman, Udacity Course Developer
-cameron *at* udacity *dot* com
+Methods used are marked throughout.
+Replacement of querySelector and other changes derived from the Udacity webcast tips video.
+Also used was the changePizzaSizes fix in the BRO course videos.
+Additional methods to reduce DOM access and activity in loops as well as request Animation methods were used from the below links that were suggested by a mentor.
+
+http://www.w3schools.com/js/js_performance.asp
+https://developer.mozilla.org/en-US/docs/Web/Events/scroll
+https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
 */
 
 // As you may have realized, this website randomly generates pizzas.
@@ -436,10 +433,10 @@ var resizePizzas = function(size) {
          console.log("bug in sizeSwitcher");
      }
 
-     var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+     var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 
-     for (var i = 0; i < randomPizzas.length; i++) {
-       randomPizzas[i].style.width = newWidth + '%';
+    for (var i = 0, l = randomPizzas.length; i < l; i++) {
+      randomPizzas[i].style.width = newWidth + "%"; //efficiency improvement. Avoids length being accessed each iteration. Mentor suggestion. -CB
      }
    }
 
@@ -481,40 +478,43 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
+window.animating = false;
+
+function pizzasAnime() {
+  if (!window.animating) {
+     window.requestAnimationFrame(updatePositions);
+
+  }
+  window.animating = true;
+}
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 var frame = 0;
 
 
-
-
 function updatePositions() {
     frame++;
-
-
-   // var items = document.getElementsByClassName('mover');
-
-   // var len = items.length;
 
     var top = document.body.scrollTop;
 
     var constArray = [];
 
     var i;
+    var l = items.length;
 
 
     for (i = 0; i < 5; i++) {
       constArray.push(Math.sin((top / 1250) + i));
     }
 
-    for (i = 0; i < items.length; i++) {
+    for (i = 0; i < l; i++) {
         var phase = constArray[i % 5];
 
         items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     }
 }
 
-// runs updatePositions on scroll
+//  This will updatePositions on scroll, request animation-CB
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
@@ -535,6 +535,5 @@ document.addEventListener('DOMContentLoaded', function() {
   updatePositions();
 
 var items = document.getElementsByClassName('mover');
-var len = items.length;
 
 });
