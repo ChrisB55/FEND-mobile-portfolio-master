@@ -489,7 +489,7 @@ function updatePositions() {
     frame++;
 
 
-
+   // var items = document.getElementsByClassName('mover');
 
     var len = items.length;
 
@@ -528,8 +528,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);//use faster DOM method by ID, reduce activity/DOM-CB
   }
-  //window.items = document.querySelectorAll('.mover');
+  window.items = document.getElementsByClassName('mover');
   updatePositions();
+var items = document.getElementsByClassName('mover');
 
-  var items = document.getElementsByClassName('mover');
 });
