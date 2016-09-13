@@ -1,13 +1,15 @@
 'use strict';
 /*
-Methods used are marked throughout.
-Replacement of querySelector and other changes derived from the Udacity webcast tips video.
+Notes:
+Repeated replacement of the querySelector with ID methods to achieve faster DOM method and reduce activity and other changes derived from the Udacity webcast tips video.
+https://classroom.udacity.com/nanodegrees/nd001/parts/00113454012/modules/273584856175462/lessons/5988439100/concepts/68776485930923
 Also used was the changePizzaSizes fix in the BRO course videos.
 Additional methods to reduce DOM access and activity in loops as well as request Animation methods were used from the below links that were suggested by a mentor.
 
 http://www.w3schools.com/js/js_performance.asp
 https://developer.mozilla.org/en-US/docs/Web/Events/scroll
 https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+-CB
 */
 
 // As you may have realized, this website randomly generates pizzas.
@@ -396,7 +398,8 @@ var pizzaElementGenerator = function(i) {
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
-  // Changes the value for the size of the pizza above the slider
+  // Changes the value for the size of the pizza above the slider-
+  // querySelector replaced-CB
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
@@ -415,7 +418,7 @@ var resizePizzas = function(size) {
 
   changeSliderLabel(size);
 
-    // Changes
+    // Changes the value for the size of the pizza above the slider
     function changePizzaSizes(size) {
      var newWidth;
 
@@ -466,7 +469,7 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 
 // Iterator for number of times the pizzas in the background have scrolled.
 // Used by updatePositions() to decide when to log the average time per frame
-var frame = 0;
+//var frame = 0;
 
 // Logs the average amount of time per 10 frames needed to move the sliding background pizzas on scroll.
 function logAverageFrame(times) {   // times is the array of User Timing measurements from updatePositions()
@@ -491,7 +494,7 @@ function pizzasAnime() {
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 var frame = 0;
 
-
+// //efficiency improvements to 2nd for i and addition of constArray. -CB
 function updatePositions() {
     frame++;
 
@@ -510,14 +513,14 @@ function updatePositions() {
     for (i = 0; i < l; i++) {
         var phase = constArray[i % 5];
 
-        items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+     items[i].style.transform = 'translateX(' + (items[i].basicLeft + 100) * phase + 'px' + ')';  // Tips FPS Webcast suggestion. Mentor suggested this be a "3rd stage" change. -CB
     }
 }
 
-//  This will updatePositions on scroll, request animation-CB
+//  This will updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
-// Generates the sliding pizzas when the page loads.
+// Generates the sliding pizzas when the page loads. Var i < reduced to 24 from 200, suggested in webcast.-CB
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
@@ -529,11 +532,12 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.getElementById("movingPizzas1").appendChild(elem);//use faster DOM method by ID, reduce activity/DOM-CB
+    document.getElementById("movingPizzas1").appendChild(elem);//querySelector replaced-CB
   }
+
   window.items = document.getElementsByClassName('mover');
   updatePositions();
-
+//querySelector replaced.-CB
 var items = document.getElementsByClassName('mover');
 
 });
