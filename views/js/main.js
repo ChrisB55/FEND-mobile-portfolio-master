@@ -485,13 +485,16 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 var frame = 0;
 
+
+
+
 function updatePositions() {
     frame++;
 
 
    // var items = document.getElementsByClassName('mover');
 
-    var len = items.length;
+   // var len = items.length;
 
     var top = document.body.scrollTop;
 
@@ -530,6 +533,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   window.items = document.getElementsByClassName('mover');
   updatePositions();
+
 var items = document.getElementsByClassName('mover');
+var len = items.length;
 
 });
